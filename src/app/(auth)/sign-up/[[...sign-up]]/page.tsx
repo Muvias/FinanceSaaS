@@ -1,7 +1,7 @@
-interface SignUpPageProps {}
+import { SignUp } from "@clerk/nextjs";
 
-export default function SignUpPage({}: SignUpPageProps) {
+export default function SignUpPage() {
     return (
-        <div>page</div>
+        <SignUp />
     )
 }

@@ -1,7 +1,7 @@
-interface SignInPageProps {}
+import { SignIn } from "@clerk/nextjs";
 
-export default function SignInPage({}: SignInPageProps) {
+export default function SignInPage() {
     return (
-        <div>page</div>
+        <SignIn />
     )
 }
