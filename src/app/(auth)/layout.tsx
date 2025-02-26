@@ -3,7 +3,7 @@ import { Loader2 } from "lucide-react";
 
 import Image from "next/image";
 
-export default function RootLayout({
+export default function AuthLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
