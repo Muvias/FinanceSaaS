@@ -27,6 +27,8 @@ import {
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
+import { useConfirm } from "@/hooks/use-confirm"
+
 import { TrashIcon } from "lucide-react"
 
 interface DataTableProps<TData, TValue> {
@@ -44,6 +46,11 @@ export function DataTable<TData, TValue>({
     onDelete,
     disabled
 }: DataTableProps<TData, TValue>) {
+    const [ConfirmDialog, confirm] = useConfirm(
+        "Você tem certeza?",
+        "Você está prestes a fazer uma exclusão em massa"
+    )
+
     const [sorting, setSorting] = useState<SortingState>([])
     const [rowSelection, setRowSelection] = useState({})
     const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>(
@@ -65,10 +72,12 @@ export function DataTable<TData, TValue>({
             columnFilters,
             rowSelection,
         },
-    })
+    });
 
     return (
         <div>
+            <ConfirmDialog />
+
             <div className="flex items-center py-4">
                 <Input
                     placeholder="Filtrar..."
@@ -85,10 +94,14 @@ export function DataTable<TData, TValue>({
                         variant="destructive"
                         className="ml-auto text-xs font-normal"
                         disabled={disabled}
-                        onClick={() => {
-                            onDelete(table.getFilteredSelectedRowModel().rows);
+                        onClick={async () => {
+                            const ok = await confirm();
 
-                            table.resetRowSelection();
+                            if (ok) {
+                                onDelete(table.getFilteredSelectedRowModel().rows);
+
+                                table.resetRowSelection();
+                            };
                         }}
                     >
                         <TrashIcon className="size-4 mr-1" />
