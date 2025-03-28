@@ -15,6 +15,13 @@
       "when": 1741027399336,
       "tag": "0001_shiny_the_spike",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1743192490329,
+      "tag": "0002_classy_nightmare",
+      "breakpoints": true
     }
   ]
 }
