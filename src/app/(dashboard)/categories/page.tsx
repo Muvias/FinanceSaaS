@@ -13,7 +13,7 @@ import { Loader2Icon, PlusIcon } from "lucide-react";
 
 import { columns } from "./columns";
 
-export default function Categories() {
+export default function CategoriesPage() {
     const newCategory = useNewCategory();
     const deleteCategories = useBulkDeleteCategories();
     const categoriesQuery = useGetCategories();

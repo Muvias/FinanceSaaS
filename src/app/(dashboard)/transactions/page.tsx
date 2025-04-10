@@ -5,23 +5,23 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete";
-import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
-import { useNewAccount } from "@/features/accounts/hooks/use-new-account";
+import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-delete";
+import { useGetTransactions } from "@/features/transactions/api/use-get-transactions";
+import { useNewTransaction } from "@/features/transactions/hooks/use-new-transaction";
 
 import { Loader2Icon, PlusIcon } from "lucide-react";
 
 import { columns } from "./columns";
 
-export default function AccountsPage() {
-    const newAccount = useNewAccount();
-    const deleteAccounts = useBulkDeleteAccounts();
-    const accountsQuery = useGetAccounts();
-    const accounts = accountsQuery.data || [];
+export default function TransactionsPage() {
+    const newTransaction = useNewTransaction();
+    const deleteTransactions = useBulkDeleteTransactions();
+    const transactionsQuery = useGetTransactions();
+    const transactions = transactionsQuery.data || [];
 
-    const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending;
+    const isDisabled = transactionsQuery.isLoading || deleteTransactions.isPending;
 
-    if (accountsQuery.isLoading) {
+    if (transactionsQuery.isLoading) {
         return (
             <div className="max-w-screen-2xl w-full mx-auto pb-10 -mt-24">
                 <Card className="border-none drop-shadow-sm">
@@ -42,27 +42,27 @@ export default function AccountsPage() {
             <Card className="border-none drop-shadow-sm">
                 <CardHeader className="gap-y-2 lg:flex-row lg:items-center lg:justify-between">
                     <CardTitle className="text-xl line-clamp-1">
-                        Contas
+                        Histórico de Transação
                     </CardTitle>
 
-                    <Button size="sm" onClick={newAccount.onOpen}>
+                    <Button size="sm" onClick={newTransaction.onOpen}>
                         <PlusIcon className="size-4 mr-1" />
-                        Adicionar conta
+                        Adicionar transação
                     </Button>
                 </CardHeader>
 
                 <CardContent>
-                    <DataTable
+                    {/* <DataTable
                         columns={columns}
-                        data={accounts}
+                        data={transactions}
                         filterKey="name"
                         onDelete={(row) => {
                             const ids = row.map((r) => r.original.id);
 
-                            deleteAccounts.mutate({ ids });
+                            deleteTransactions.mutate({ ids });
                         }}
                         disabled={isDisabled}
-                    />
+                    /> */}
                 </CardContent>
             </Card>
         </div>
