@@ -9,6 +9,8 @@ import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/
 import { Input } from "@/components/ui/input";
 
 import { TrashIcon } from "lucide-react";
+import { Select } from "@/components/select";
+import { DatePicker } from "@/components/date-picker";
 
 const formSchema = z.object({
     date: z.coerce.date(),
@@ -43,7 +45,8 @@ export function TransactionForm({ id, defaultValues, accountOptions, categoryOpt
     });
 
     function handleSubmit(values: FormValues) {
-        onSubmit(values);
+        console.log(values);
+        // onSubmit(values);
     }
 
     function handleDelete() {
@@ -57,19 +60,81 @@ export function TransactionForm({ id, defaultValues, accountOptions, categoryOpt
                 className="space-y-4 pt-4"
             >
                 <FormField
-                    name="name"
+                    name="accountId"
                     control={form.control}
                     render={({ field }) => (
                         <FormItem>
                             <FormLabel>
-                                Nome
+                                Conta
+                            </FormLabel>
+
+                            <FormControl>
+                                <Select
+                                    placeholder="Selecione uma conta"
+                                    options={accountOptions}
+                                    onCreate={onCreateAccount}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    disabled={disabled}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    name="categoryId"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Categoria
+                            </FormLabel>
+
+                            <FormControl>
+                                <Select
+                                    placeholder="Selecione uma categoria"
+                                    options={categoryOptions}
+                                    onCreate={onCreateCategory}
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    disabled={disabled}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    name="payee"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Beneficiário
                             </FormLabel>
 
                             <FormControl>
                                 <Input
-                                    placeholder="Ex. Dinheiro, Banco, Cartão de Crédito"
+                                    placeholder="Adicionar um Beneficiário"
                                     disabled={disabled}
                                     {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    name="date"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormControl>
+                                <DatePicker
+                                    value={field.value}
+                                    onChange={field.onChange}
+                                    disabled={disabled}
                                 />
                             </FormControl>
                         </FormItem>
@@ -80,7 +145,7 @@ export function TransactionForm({ id, defaultValues, accountOptions, categoryOpt
                     className="w-full"
                     disabled={disabled}
                 >
-                    {id ? "Salvar mudanças" : "Criar conta"}
+                    {id ? "Salvar mudanças" : "Criar transação"}
                 </Button>
 
                 {!!id && (
@@ -93,7 +158,7 @@ export function TransactionForm({ id, defaultValues, accountOptions, categoryOpt
                     >
                         <TrashIcon className="size-4 mr-1.5" />
 
-                        Deletar Conta
+                        Deletar
                     </Button>
                 )}
             </form>

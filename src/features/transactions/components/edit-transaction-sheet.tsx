@@ -7,7 +7,7 @@ import { useEditTransaction } from "../api/use-edit-transaction";
 import { useGetTransaction } from "../api/use-get-transaction";
 import { useOpenTransaction } from "../hooks/use-open-transaction";
 
-import { AccountForm } from "./account-form";
+import { TransactionForm } from "./transaction-form";
 
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from "@/components/ui/sheet";
 
@@ -84,13 +84,14 @@ export function EditTransactionSheet() {
                             <Loader2Icon className="size-4 text-muted-foreground animate-spin" />
                         </div>
                     ) : (
-                        <AccountForm
-                            id={id}
-                            onSubmit={onSubmit}
-                            disabled={isPending}
-                            defaultValues={defaultValues}
-                            onDelete={onDelete}
-                        />
+                        <></>
+                        // <TransactionForm
+                        //     id={id}
+                        //     onSubmit={onSubmit}
+                        //     disabled={isPending}
+                        //     defaultValues={defaultValues}
+                        //     onDelete={onDelete}
+                        // />
                     )}
                 </SheetContent>
             </Sheet>
