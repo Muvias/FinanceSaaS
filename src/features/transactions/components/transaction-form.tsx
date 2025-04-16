@@ -8,9 +8,13 @@ import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 
-import { TrashIcon } from "lucide-react";
-import { Select } from "@/components/select";
+import { AmountInput } from "@/components/amount-input";
 import { DatePicker } from "@/components/date-picker";
+import { Select } from "@/components/select";
+import { Textarea } from "@/components/ui/textarea";
+
+import { convertAmountToMiliunits } from "@/lib/utils";
+import { TrashIcon } from "lucide-react";
 
 const formSchema = z.object({
     date: z.coerce.date(),
@@ -45,8 +49,14 @@ export function TransactionForm({ id, defaultValues, accountOptions, categoryOpt
     });
 
     function handleSubmit(values: FormValues) {
-        console.log(values);
-        // onSubmit(values);
+        const amount = parseFloat(values.amount);
+
+        const amountInMiliunits = convertAmountToMiliunits(amount);
+
+        onSubmit({
+            ...values,
+            amount: amountInMiliunits
+        });
     }
 
     function handleDelete() {
@@ -119,6 +129,47 @@ export function TransactionForm({ id, defaultValues, accountOptions, categoryOpt
                                     placeholder="Adicionar um Beneficiário"
                                     disabled={disabled}
                                     {...field}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    name="amount"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Quantia
+                            </FormLabel>
+
+                            <FormControl>
+                                <AmountInput
+                                    {...field}
+                                    placeholder="0.00"
+                                    disabled={disabled}
+                                />
+                            </FormControl>
+                        </FormItem>
+                    )}
+                />
+
+                <FormField
+                    name="notes"
+                    control={form.control}
+                    render={({ field }) => (
+                        <FormItem>
+                            <FormLabel>
+                                Notas
+                            </FormLabel>
+
+                            <FormControl>
+                                <Textarea
+                                    {...field}
+                                    value={field.value ?? ""}
+                                    disabled={disabled}
+                                    placeholder="Notas opcionais"
                                 />
                             </FormControl>
                         </FormItem>

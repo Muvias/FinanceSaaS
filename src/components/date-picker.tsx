@@ -36,6 +36,7 @@ export function DatePicker({ value, disabled, onChange }: Props) {
                     onSelect={onChange}
                     disabled={disabled}
                     initialFocus
+                    className="pointer-events-auto"
                 />
             </PopoverContent>
         </Popover>
