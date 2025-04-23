@@ -52,17 +52,17 @@ export default function TransactionsPage() {
                 </CardHeader>
 
                 <CardContent>
-                    {/* <DataTable
+                    <DataTable
                         columns={columns}
                         data={transactions}
-                        filterKey="name"
+                        filterKey="date"
                         onDelete={(row) => {
                             const ids = row.map((r) => r.original.id);
 
                             deleteTransactions.mutate({ ids });
                         }}
                         disabled={isDisabled}
-                    /> */}
+                    />
                 </CardContent>
             </Card>
         </div>
