@@ -3,8 +3,8 @@
 import { Button } from "@/components/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 
-import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
+import { useDeleteTransaction } from "@/features/transactions/api/use-delete-transaction";
+import { useOpenTransaction } from "@/features/transactions/hooks/use-open-transaction";
 import { useConfirm } from "@/hooks/use-confirm";
 
 import { EditIcon, EllipsisVerticalIcon, TrashIcon } from "lucide-react";
@@ -16,11 +16,11 @@ interface ActionsProps {
 export function Actions({ id }: ActionsProps) {
     const [ConfirmDialog, confirm] = useConfirm(
         "Você tem certeza?",
-        "Você está prestes a deletar essa conta, esta ação não poderá ser desfeita"
+        "Você está prestes a deletar essa transação, esta ação não poderá ser desfeita"
     )
 
-    const { onOpen } = useOpenAccount();
-    const deleteMutation = useDeleteAccount(id);
+    const { onOpen } = useOpenTransaction();
+    const deleteMutation = useDeleteTransaction(id);
 
     async function onDelete() {
         const ok = await confirm();
