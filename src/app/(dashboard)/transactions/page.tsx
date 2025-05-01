@@ -12,14 +12,40 @@ import { useNewTransaction } from "@/features/transactions/hooks/use-new-transac
 import { Loader2Icon, PlusIcon } from "lucide-react";
 
 import { columns } from "./columns";
+import { useState } from "react";
+import { UploadButton } from "./UploadButton";
+
+enum VARIANTS {
+    LIST = "LIST",
+    IMPORT = "IMPORT"
+};
+
+const INITIAL_IMPORT_RESULTS = {
+    data: [],
+    erros: [],
+    meta: {}
+};
 
 export default function TransactionsPage() {
+    const [variant, setVariant] = useState<VARIANTS>(VARIANTS.LIST);
+    const [importResults, setImportResults] = useState(INITIAL_IMPORT_RESULTS);
+
     const newTransaction = useNewTransaction();
     const deleteTransactions = useBulkDeleteTransactions();
     const transactionsQuery = useGetTransactions();
     const transactions = transactionsQuery.data || [];
 
     const isDisabled = transactionsQuery.isLoading || deleteTransactions.isPending;
+
+    function onUpload(results: typeof INITIAL_IMPORT_RESULTS) {
+        setImportResults(results);
+        setVariant(VARIANTS.IMPORT);
+    };
+
+    function onCancelImport() {
+        setImportResults(INITIAL_IMPORT_RESULTS);
+        setVariant(VARIANTS.LIST);
+    };
 
     if (transactionsQuery.isLoading) {
         return (
@@ -37,6 +63,16 @@ export default function TransactionsPage() {
         )
     }
 
+    if (variant === VARIANTS.IMPORT) {
+        return (
+            <>
+                <div>
+                    Screen Import
+                </div>
+            </>
+        )
+    }
+
     return (
         <div className="max-w-screen-2xl w-full mx-auto pb-10 -mt-24">
             <Card className="border-none drop-shadow-sm">
@@ -45,10 +81,18 @@ export default function TransactionsPage() {
                         Histórico de Transação
                     </CardTitle>
 
-                    <Button size="sm" onClick={newTransaction.onOpen}>
-                        <PlusIcon className="size-4 mr-1" />
-                        Adicionar transação
-                    </Button>
+                    <div
+                        className="flex items-center gap-x-2"
+                    >
+                        <Button size="sm" onClick={newTransaction.onOpen}>
+                            <PlusIcon className="size-4 mr-1" />
+                            Adicionar transação
+                        </Button>
+
+                        <UploadButton
+                            onUpload={onUpload}
+                        />
+                    </div>
                 </CardHeader>
 
                 <CardContent>
