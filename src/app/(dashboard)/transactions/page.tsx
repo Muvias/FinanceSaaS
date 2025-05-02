@@ -14,6 +14,7 @@ import { Loader2Icon, PlusIcon } from "lucide-react";
 import { columns } from "./columns";
 import { useState } from "react";
 import { UploadButton } from "./UploadButton";
+import { ImportCard } from "./ImportCard";
 
 enum VARIANTS {
     LIST = "LIST",
@@ -66,9 +67,11 @@ export default function TransactionsPage() {
     if (variant === VARIANTS.IMPORT) {
         return (
             <>
-                <div>
-                    Screen Import
-                </div>
+                <ImportCard
+                    data={importResults.data}
+                    onCancel={onCancelImport}
+                    onSubmit={() => { }}
+                />
             </>
         )
     }
