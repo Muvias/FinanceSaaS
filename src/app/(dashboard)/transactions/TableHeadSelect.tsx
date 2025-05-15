@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 const options = [
     "amount",
     "payee",
-    "notes",
     "date"
 ];
 

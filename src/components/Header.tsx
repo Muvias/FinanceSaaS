@@ -8,7 +8,7 @@ import { WelcomeMsg } from "./WelcomeMsg";
 
 export function Header() {
     return (
-        <header className="px-4 lg:px-14 py-8 lg:pb-36 bg-gradient-to-b from-blue-700 to-blue-500">
+        <header className="px-4 lg:px-14 py-8 pb-36 bg-gradient-to-b from-blue-700 to-blue-500">
             <div className="max-w-screen-2xl mx-auto">
                 <div className="flex items-center justify-between w-full mb-14">
                     <div className="flex items-center lg:gap-x-16">
