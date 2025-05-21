@@ -1,6 +1,7 @@
 import { format } from "date-fns";
-import { Tooltip, XAxis, AreaChart, Area, ResponsiveContainer, CartesianGrid } from "recharts";
-import { CustomTooltip } from "./CustomTooltip";
+import { Area, AreaChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+
+import { CustomTooltip } from "../CustomTooltip";
 
 interface AreaVariantProps {
     data: {
