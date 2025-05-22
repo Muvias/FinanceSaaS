@@ -5,6 +5,7 @@ import { Loader2 } from "lucide-react";
 import { HeaderLogo } from "./HeaderLogo";
 import { Navigation } from "./Navigation";
 import { WelcomeMsg } from "./WelcomeMsg";
+import { Filters } from "./Filters";
 
 export function Header() {
     return (
@@ -18,7 +19,7 @@ export function Header() {
                     </div>
 
                     <ClerkLoading>
-                        <Loader2 className="size-6 animate-spin text-white/80"/>
+                        <Loader2 className="size-6 animate-spin text-white/80" />
                     </ClerkLoading>
 
                     <ClerkLoaded>
@@ -27,6 +28,8 @@ export function Header() {
                 </div>
 
                 <WelcomeMsg />
+
+                <Filters />
             </div>
         </header>
     )

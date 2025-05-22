@@ -2,12 +2,13 @@ import { useState } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "../ui/select";
+import { Skeleton } from "../ui/skeleton";
 
 import { PieVariant } from "./PieVariant";
 import { RadarVariant } from "./RadarVariant";
 import { RadialVariant } from "./RadialVariant";
 
-import { FileSearchIcon, PieChartIcon, RadarIcon, TargetIcon } from "lucide-react";
+import { FileSearchIcon, Loader2Icon, PieChartIcon, RadarIcon, TargetIcon } from "lucide-react";
 
 interface SpendingPieProps {
     data?: {
@@ -88,6 +89,23 @@ export function SpendingPie({ data = [] }: SpendingPieProps) {
                         {chartType === "radial" && <RadialVariant data={data} />}
                     </>
                 )}
+            </CardContent>
+        </Card>
+    )
+}
+
+export function SpendingPieLoading() {
+    return (
+        <Card className="border-none drop-shadow-sm">
+            <CardHeader className="flex lg:flex-row lg:items-center justify-between space-y-2 lg:space-y-0">
+                <Skeleton className="h-8 w-48" />
+                <Skeleton className="h-8 w-full lg:w-[120px]" />
+            </CardHeader>
+
+            <CardContent>
+                <div className="flex items-center justify-center h-[350px] w-full">
+                    <Loader2Icon className="h-6 w-6 text-slate-300 animate-spin" />
+                </div>
             </CardContent>
         </Card>
     )
